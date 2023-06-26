@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+let targetPort = Sender()
+
 @main
 struct RobotControllerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartupView(commObject: targetPort)
         }
     }
 }

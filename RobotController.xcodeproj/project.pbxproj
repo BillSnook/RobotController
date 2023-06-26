@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		A93F51DA2A46253F00CA3CF7 /* RobotControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51D92A46253F00CA3CF7 /* RobotControllerApp.swift */; };
-		A93F51DC2A46253F00CA3CF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51DB2A46253F00CA3CF7 /* ContentView.swift */; };
+		A93F51DC2A46253F00CA3CF7 /* StartupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51DB2A46253F00CA3CF7 /* StartupView.swift */; };
 		A93F51DE2A46254000CA3CF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93F51DD2A46254000CA3CF7 /* Assets.xcassets */; };
 		A93F51E12A46254000CA3CF7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93F51E02A46254000CA3CF7 /* Preview Assets.xcassets */; };
+		A93F51E82A46258300CA3CF7 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51E72A46258200CA3CF7 /* Sender.swift */; };
+		A93F51ED2A46262C00CA3CF7 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EC2A46262C00CA3CF7 /* ConnectionView.swift */; };
+		A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A93F51D62A46253F00CA3CF7 /* RobotController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A93F51D92A46253F00CA3CF7 /* RobotControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotControllerApp.swift; sourceTree = "<group>"; };
-		A93F51DB2A46253F00CA3CF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A93F51DB2A46253F00CA3CF7 /* StartupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupView.swift; sourceTree = "<group>"; };
 		A93F51DD2A46254000CA3CF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A93F51E02A46254000CA3CF7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A93F51E72A46258200CA3CF7 /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		A93F51EC2A46262C00CA3CF7 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
+		A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +58,8 @@
 			isa = PBXGroup;
 			children = (
 				A93F51D92A46253F00CA3CF7 /* RobotControllerApp.swift */,
-				A93F51DB2A46253F00CA3CF7 /* ContentView.swift */,
+				A93F51EA2A4625B600CA3CF7 /* Utilities */,
+				A93F51EB2A4625C800CA3CF7 /* ViewControllers */,
 				A93F51DD2A46254000CA3CF7 /* Assets.xcassets */,
 				A93F51DF2A46254000CA3CF7 /* Preview Content */,
 			);
@@ -65,6 +72,24 @@
 				A93F51E02A46254000CA3CF7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A93F51EA2A4625B600CA3CF7 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A93F51E72A46258200CA3CF7 /* Sender.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A93F51EB2A4625C800CA3CF7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A93F51DB2A46253F00CA3CF7 /* StartupView.swift */,
+				A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */,
+				A93F51EC2A46262C00CA3CF7 /* ConnectionView.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +162,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A93F51DC2A46253F00CA3CF7 /* ContentView.swift in Sources */,
+				A93F51DC2A46253F00CA3CF7 /* StartupView.swift in Sources */,
+				A93F51ED2A46262C00CA3CF7 /* ConnectionView.swift in Sources */,
+				A93F51E82A46258300CA3CF7 /* Sender.swift in Sources */,
+				A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */,
 				A93F51DA2A46253F00CA3CF7 /* RobotControllerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
