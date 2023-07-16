@@ -8,52 +8,21 @@
 import SwiftUI
 
 struct StartupView: View {
-    
-    enum Devices: String, CaseIterable, Identifiable {
-        case camera01
-        case hughie
-        case dewie
-        case louie
-        case develop00
-        case develop01
-        case develop40
-        case develop50
-        case devx
-        
-        var id: String { self.rawValue.capitalized }
-        func name() -> String {
-            switch self {
-            case .hughie:
-                return "Develop60"
-            case .dewie:
-                return "Develop61"
-            case .louie:
-                return "Develop62"
-            default:
-                return id
-            }
-        }
-    }
-    
-    @ObservedObject var commObject: Sender
+
+    @ObservedObject var commObject = targetPort
 
     @State private var fullText: String = "Responses show up here."
 
     var body: some View {
         NavigationStack {
-            VStack {
+//            VStack {
                 Form {
                     Section() {
-                        ConnectView(commObject: commObject)
+                        ConnectView()
+                    }
+                    Section() {
                         if commObject.connectionState == .connected {
-                            HStack {
-                                Button("Send") {
-                                    print("Send Sent")
-                                }
-                                .buttonStyle(.bordered)
-                                TextField("Type command here", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
-                                    .textFieldStyle(.roundedBorder)
-                            }
+                            SendCommandView()
                             HStack {
                                 Button("Calibrate") {
                                     print("Send Calibrate")
@@ -71,9 +40,12 @@ struct StartupView: View {
                                 }
                                 .buttonStyle(.bordered)
                             }
+                            .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
                             HStack {
                                 Button("Status") {
-                                    fullText = "Sent Status Request"
+                                    print("Send Status Request")
+                                    commObject.sendPi( "D" )
+                                    commObject.responseString = "\nSent Status Request\n"
                                 }
                                 .buttonStyle(.bordered)
                                 Spacer()
@@ -83,10 +55,11 @@ struct StartupView: View {
                                 .buttonStyle(.bordered)
                                 Spacer()
                                 Button("Clear") {
-                                    fullText = "Sent Clear Request"
+                                    commObject.responseString = ""
                                 }
                                 .buttonStyle(.bordered)
                             }
+                            .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
                             HStack {
                                 Button("Ping") {
                                     print("Send Ping")
@@ -103,14 +76,14 @@ struct StartupView: View {
                                 }
                                 .buttonStyle(.bordered)
                             }
+                            .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
                         }
                     }
-                    .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
                     Section() {
                         TextEditor(text: $commObject.responseString)
                     }
                 }
-            }
+//            }
             .navigationBarTitle("Robot Commander", displayMode: .inline)
         }
     }
@@ -118,6 +91,6 @@ struct StartupView: View {
 
 struct StartupView_Previews: PreviewProvider {
     static var previews: some View {
-        StartupView(commObject: targetPort)
+        StartupView()
     }
 }

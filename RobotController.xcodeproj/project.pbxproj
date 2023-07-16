@@ -12,7 +12,7 @@
 		A93F51DE2A46254000CA3CF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93F51DD2A46254000CA3CF7 /* Assets.xcassets */; };
 		A93F51E12A46254000CA3CF7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93F51E02A46254000CA3CF7 /* Preview Assets.xcassets */; };
 		A93F51E82A46258300CA3CF7 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51E72A46258200CA3CF7 /* Sender.swift */; };
-		A93F51ED2A46262C00CA3CF7 /* ConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EC2A46262C00CA3CF7 /* ConnectionView.swift */; };
+		A93F51ED2A46262C00CA3CF7 /* SendCommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */; };
 		A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,7 +23,7 @@
 		A93F51DD2A46254000CA3CF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A93F51E02A46254000CA3CF7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A93F51E72A46258200CA3CF7 /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
-		A93F51EC2A46262C00CA3CF7 /* ConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionView.swift; sourceTree = "<group>"; };
+		A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCommandView.swift; sourceTree = "<group>"; };
 		A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +87,7 @@
 			children = (
 				A93F51DB2A46253F00CA3CF7 /* StartupView.swift */,
 				A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */,
-				A93F51EC2A46262C00CA3CF7 /* ConnectionView.swift */,
+				A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -163,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A93F51DC2A46253F00CA3CF7 /* StartupView.swift in Sources */,
-				A93F51ED2A46262C00CA3CF7 /* ConnectionView.swift in Sources */,
+				A93F51ED2A46262C00CA3CF7 /* SendCommandView.swift in Sources */,
 				A93F51E82A46258300CA3CF7 /* Sender.swift in Sources */,
 				A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */,
 				A93F51DA2A46253F00CA3CF7 /* RobotControllerApp.swift in Sources */,

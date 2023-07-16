@@ -13,7 +13,7 @@ let targetPort = Sender()
 struct RobotControllerApp: App {
     var body: some Scene {
         WindowGroup {
-            StartupView(commObject: targetPort)
+            StartupView()
         }
     }
 }

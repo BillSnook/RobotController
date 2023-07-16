@@ -7,11 +7,15 @@
 
 import SwiftUI
 
-var isConnected = false     // WFS true for testing UI w/o connection
-var isConnecting = false    // Enables cancelling
+// Button function/name
+enum ConnectionRequest: String {
+    case connect = "Connect"
+    case disconnect = "Disconnect"
+}
 
 struct ConnectView: View {
     
+    // Known devices using their .local network names
     enum Devices: String, CaseIterable, Identifiable {
         case camera01
         case hughie
@@ -24,26 +28,17 @@ struct ConnectView: View {
         case devx
         
         var id: String { self.rawValue.capitalized }
-
-        func name() -> String {
-            switch self {
-            case .hughie:
-                return "Develop60"
-            case .dewie:
-                return "Develop61"
-            case .louie:
-                return "Develop62"
-            default:
-                return id
-            }
-        }
     }
 
-    @ObservedObject var commObject: Sender
-
-    @State private var selectedDevice: Devices = .hughie
-    
     let lightGray = Color(red: 0.95, green: 0.95, blue: 0.95)
+
+    // This is the Sender object and here we get updates when ever any @Published object changes
+    @ObservedObject var commObject = targetPort
+
+    @State private var selectedDevice: Devices = .louie
+
+    var connectionRequest: ConnectionRequest = .connect
+
     var body: some View {
         HStack {
             if commObject.connectionState == .disconnected {
@@ -62,7 +57,7 @@ struct ConnectView: View {
             Button(action: {
                 connectionButtonAction()
             }) {
-                Text(commObject.connectionState == .connecting ? "Connecting..." : commObject.connectionRequest.rawValue)
+                Text(commObject.connectionState.buttonName())
             }
             .buttonStyle(.bordered)
             .background(commObject.connectionState == .connecting ? .clear : lightGray)
@@ -70,17 +65,17 @@ struct ConnectView: View {
             .cornerRadius(10.0)
             Spacer()
         }
-        .padding(EdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 0.0))
+//        .padding(EdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 0.0))
     }
     
     func connectionButtonAction() {
-        print("\nConnectView NOTE - Requested \(commObject.connectionRequest.rawValue) in connection state \(commObject.connectionState.rawValue)")
-        if commObject.connectionRequest == .connect {
-            commObject.requestConnectionStateChange(.connect, selectedDevice.name())
+        print("\nConnectView, requested \(connectionRequest.rawValue) in connection state \(commObject.connectionState.rawValue)")
+        if commObject.connectionState == .disconnected {
+            print("  Requesting connect")
+            commObject.requestConnectionStateChange(.connect, selectedDevice.id)
         } else {
-            commObject.requestConnectionStateChange(.disconnect, selectedDevice.name())
-            commObject.connectionRequest = .connect
-
+            print("  Requesting disconnect")
+            commObject.requestConnectionStateChange(.disconnect, selectedDevice.id)
         }
     }
 }
@@ -90,7 +85,7 @@ struct ConnectView_Previews: PreviewProvider {
         VStack {
             Form {
                 Section() {
-                    ConnectView(commObject: targetPort)
+                    ConnectView()
                 }
            }
        }
