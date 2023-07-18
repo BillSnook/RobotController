@@ -14,6 +14,8 @@
 		A93F51E82A46258300CA3CF7 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51E72A46258200CA3CF7 /* Sender.swift */; };
 		A93F51ED2A46262C00CA3CF7 /* SendCommandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */; };
 		A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */; };
+		A954C7242A66062E0019DF7F /* CalibrateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A954C7232A66062E0019DF7F /* CalibrateView.swift */; };
+		A954C7262A6606670019DF7F /* DriveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A954C7252A6606670019DF7F /* DriveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,9 @@
 		A93F51E72A46258200CA3CF7 /* Sender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCommandView.swift; sourceTree = "<group>"; };
 		A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		A954C7232A66062E0019DF7F /* CalibrateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateView.swift; sourceTree = "<group>"; };
+		A954C7252A6606670019DF7F /* DriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveView.swift; sourceTree = "<group>"; };
+		A9B7E0102A63A60100C97DC2 /* ButtonEqualHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonEqualHStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				A93F51E72A46258200CA3CF7 /* Sender.swift */,
+				A9B7E0102A63A60100C97DC2 /* ButtonEqualHStack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -88,6 +94,8 @@
 				A93F51DB2A46253F00CA3CF7 /* StartupView.swift */,
 				A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */,
 				A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */,
+				A954C7232A66062E0019DF7F /* CalibrateView.swift */,
+				A954C7252A6606670019DF7F /* DriveView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -166,7 +174,9 @@
 				A93F51ED2A46262C00CA3CF7 /* SendCommandView.swift in Sources */,
 				A93F51E82A46258300CA3CF7 /* Sender.swift in Sources */,
 				A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */,
+				A954C7242A66062E0019DF7F /* CalibrateView.swift in Sources */,
 				A93F51DA2A46253F00CA3CF7 /* RobotControllerApp.swift in Sources */,
+				A954C7262A6606670019DF7F /* DriveView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

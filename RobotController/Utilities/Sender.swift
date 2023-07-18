@@ -28,7 +28,7 @@ enum ConnectionState: String {          // State of communication channel to dev
 }
 
 public class Sender: ObservableObject {
-    @Published var connectionState: ConnectionState = .disconnected
+    @Published var connectionState: ConnectionState = .connected    // For testing buttons
     @Published var responseString: String = "Ready..."
 
     var socketfd: Int32 = 0

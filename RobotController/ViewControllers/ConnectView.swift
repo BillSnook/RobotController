@@ -47,25 +47,39 @@ struct ConnectView: View {
                         Text(devices.rawValue.capitalized).tag(devices)
                     }
                 }
-                .frame(width: 160.0, height: 0.0)
+                .frame(width: 140.0, height: 0.0)
                 .pickerStyle(MenuPickerStyle())
-                .position(CGPoint(x: 50.0, y: 10.0))
-                .padding(20.0)
+                .position(CGPoint(x: 70.0, y: 10.0))
+                .padding(EdgeInsets(top: 10.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
+
+                Spacer()
+                    .background(.orange)
+                Button(action: {
+                    connectionButtonAction()
+                }) {
+                    Text(commObject.connectionState.buttonName())
+                }
+                .buttonStyle(.bordered)
+                .background(lightGray)
+                .foregroundColor(.black)
+                .cornerRadius(10.0)
+                Spacer()
+                    .background(.orange)
+            } else {
+                Spacer()
+                Button(action: {
+                    connectionButtonAction()
+                }) {
+                    Text(commObject.connectionState.buttonName())
+                }
+                .buttonStyle(.bordered)
+                .background(commObject.connectionState == .connecting ? .clear : lightGray)
+                .foregroundColor(commObject.connectionState == .connecting ? .gray : .black)
+                .cornerRadius(10.0)
+                Spacer()
             }
 
-            Spacer()
-            Button(action: {
-                connectionButtonAction()
-            }) {
-                Text(commObject.connectionState.buttonName())
-            }
-            .buttonStyle(.bordered)
-            .background(commObject.connectionState == .connecting ? .clear : lightGray)
-            .foregroundColor(commObject.connectionState == .connecting ? .gray : .black)
-            .cornerRadius(10.0)
-            Spacer()
         }
-//        .padding(EdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 0.0))
     }
     
     func connectionButtonAction() {

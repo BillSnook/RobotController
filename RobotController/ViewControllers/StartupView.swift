@@ -11,32 +11,34 @@ struct StartupView: View {
 
     @ObservedObject var commObject = targetPort
 
-    @State private var fullText: String = "Responses show up here."
+//
+    @State private var path: [String] = []
 
     var body: some View {
-        NavigationStack {
-//            VStack {
+        NavigationStack(path: $path) {
+            VStack(alignment: .center) {
                 Form {
                     Section() {
                         ConnectView()
                     }
-                    Section() {
-                        if commObject.connectionState == .connected {
+                    if commObject.connectionState == .connected {
+                        Section() {
                             SendCommandView()
                             HStack {
                                 Button("Calibrate") {
-                                    print("Send Calibrate")
-                                    fullText += "\nSent Calibrate"
+                                    print("Calibrate nav link")
+                                    path.append("CalibrateView")
                                 }
                                 .buttonStyle(.bordered)
+
                                 Spacer()
                                 Button("Control") {
-                                    fullText += "\nSent Control"
+                                    print("Control nav link")
+                                    path.append("DriveView")
                                 }
                                 .buttonStyle(.bordered)
                                 Spacer()
                                 Button("Direct") {
-                                    fullText += "\nSent Direct"
                                 }
                                 .buttonStyle(.bordered)
                             }
@@ -50,7 +52,6 @@ struct StartupView: View {
                                 .buttonStyle(.bordered)
                                 Spacer()
                                 Button("Range") {
-                                    fullText = "Sent Range Request"
                                 }
                                 .buttonStyle(.bordered)
                                 Spacer()
@@ -79,13 +80,26 @@ struct StartupView: View {
                             .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
                         }
                     }
-                    Section() {
-                        TextEditor(text: $commObject.responseString)
-                    }
                 }
-//            }
+            }
             .navigationBarTitle("Robot Commander", displayMode: .inline)
+            .navigationDestination(for: String.self) { value in
+                switch value {
+                case "CalibrateView":
+                    CalibrateView()
+                case "ControlView":
+                    DriveView()
+                default:
+                    DriveView()
+                }
+            }
+            Spacer()
+            TextEditor(text: $commObject.responseString)
+                .frame(height: 200.0)
+                .background(Color.yellow)
+                .font(.caption)
         }
+        .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
     }
 }
 
