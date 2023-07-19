@@ -16,6 +16,7 @@
 		A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */; };
 		A954C7242A66062E0019DF7F /* CalibrateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A954C7232A66062E0019DF7F /* CalibrateView.swift */; };
 		A954C7262A6606670019DF7F /* DriveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A954C7252A6606670019DF7F /* DriveView.swift */; };
+		A954C7272A68636C0019DF7F /* TitleSaveHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +30,7 @@
 		A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 		A954C7232A66062E0019DF7F /* CalibrateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateView.swift; sourceTree = "<group>"; };
 		A954C7252A6606670019DF7F /* DriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveView.swift; sourceTree = "<group>"; };
-		A9B7E0102A63A60100C97DC2 /* ButtonEqualHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonEqualHStack.swift; sourceTree = "<group>"; };
+		A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSaveHStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				A93F51E72A46258200CA3CF7 /* Sender.swift */,
-				A9B7E0102A63A60100C97DC2 /* ButtonEqualHStack.swift */,
+				A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -177,6 +178,7 @@
 				A954C7242A66062E0019DF7F /* CalibrateView.swift in Sources */,
 				A93F51DA2A46253F00CA3CF7 /* RobotControllerApp.swift in Sources */,
 				A954C7262A6606670019DF7F /* DriveView.swift in Sources */,
+				A954C7272A68636C0019DF7F /* TitleSaveHStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
