@@ -19,6 +19,8 @@ struct CalibrateView: View {
             .cornerRadius(10.0)
             VStack {
                 TitleSaveHStack(title: "Speed Alignment", fileName: "SpeedAlignment")
+                    .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
+//                ManualSpeedSet()
             }
             Spacer()
         }

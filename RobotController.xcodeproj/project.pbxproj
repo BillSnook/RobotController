@@ -44,6 +44,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A92B08FE2A704BEA00777853 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */,
+				A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */,
+				A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A93F51CD2A46253F00CA3CF7 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +76,7 @@
 				A93F51D92A46253F00CA3CF7 /* RobotControllerApp.swift */,
 				A93F51EA2A4625B600CA3CF7 /* Utilities */,
 				A93F51EB2A4625C800CA3CF7 /* ViewControllers */,
+				A92B08FE2A704BEA00777853 /* Views */,
 				A93F51DD2A46254000CA3CF7 /* Assets.xcassets */,
 				A93F51DF2A46254000CA3CF7 /* Preview Content */,
 			);
@@ -84,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				A93F51E72A46258200CA3CF7 /* Sender.swift */,
-				A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -93,8 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				A93F51DB2A46253F00CA3CF7 /* StartupView.swift */,
-				A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */,
-				A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */,
 				A954C7232A66062E0019DF7F /* CalibrateView.swift */,
 				A954C7252A6606670019DF7F /* DriveView.swift */,
 			);
