@@ -24,6 +24,8 @@ struct TitleSaveHStack: View {
             
             Spacer()
             Text(title)
+                .font(.headline)
+//                .fontWeight(.semibold)
             Spacer()
             Button("Save") {
                 print("Save button action")

@@ -18,6 +18,7 @@ struct ConnectView: View {
     // Known devices using their .local network names
     enum Devices: String, CaseIterable, Identifiable {
         case camera01
+        case donald
         case hughie
         case dewie
         case louie
@@ -32,10 +33,10 @@ struct ConnectView: View {
 
     let lightGray = Color(red: 0.95, green: 0.95, blue: 0.95)
 
-    // This is the Sender object and here we get updates when ever any @Published object changes
+    // This is the Sender object and here we get updates whenever any of it's @Published object changes
     @ObservedObject var commObject = targetPort
 
-    @State private var selectedDevice: Devices = .louie
+    @State private var selectedDevice: Devices = .donald
 
     var connectionRequest: ConnectionRequest = .connect
 

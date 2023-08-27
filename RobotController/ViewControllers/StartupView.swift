@@ -11,8 +11,12 @@ struct StartupView: View {
 
     @ObservedObject var commObject = targetPort
 
-//
     @State private var path: [String] = []
+
+    init() {
+        commObject.responseString = "\nStarting ...\n"
+//        commObject.sendPi( "@" )
+    }
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -37,6 +41,7 @@ struct StartupView: View {
                                     path.append("DriveView")
                                 }
                                 .buttonStyle(.bordered)
+
                                 Spacer()
                                 Button("Direct") {
                                 }
@@ -50,10 +55,12 @@ struct StartupView: View {
                                     commObject.responseString = "\nSent Status Request\n"
                                 }
                                 .buttonStyle(.bordered)
+
                                 Spacer()
                                 Button("Range") {
                                 }
                                 .buttonStyle(.bordered)
+
                                 Spacer()
                                 Button("Clear") {
                                     commObject.responseString = ""
@@ -66,11 +73,13 @@ struct StartupView: View {
                                     print("Send Ping")
                                 }
                                 .buttonStyle(.bordered)
+
                                 Spacer()
                                 Button("Center") {
                                     print("Send Center")
                                 }
                                 .buttonStyle(.bordered)
+                                
                                 Spacer()
                                 Button("Stop") {
                                     print("Send Stop")
@@ -98,8 +107,9 @@ struct StartupView: View {
                 .frame(height: 200.0)
                 .background(Color.yellow)
                 .font(.caption)
+                .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
         }
-        .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
+//        .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
     }
 }
 

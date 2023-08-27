@@ -28,7 +28,7 @@ enum ConnectionState: String {          // State of communication channel to dev
 }
 
 public class Sender: ObservableObject {
-    @Published var connectionState: ConnectionState = .connected    // For testing buttons
+    @Published var connectionState: ConnectionState = .disconnected    // For testing buttons, connected, else normally disconnected
     @Published var responseString: String = "Ready..."
 
     var socketfd: Int32 = 0
@@ -65,7 +65,51 @@ public class Sender: ObservableObject {
     }
 
     private func updateResponse(_ message: String) {
-        responseString += "\n" + message
+
+        print(">> \(message)")
+        switch message.first {
+        case "R":
+            let params = message.split(separator: " ")
+            guard params.count == 3 else { return }
+//            pwmTextField.text = String(params[1])
+//            pinTextField.text = String(params[2])
+//            pwmIsValid = true
+//            pinIsValid = true
+        case "S":
+            let params = message.split(separator: "\n")
+            let header = params[0].split(separator: " ")
+            guard header.count == 2 else {
+                responseString += "\nSpeed array access - invalid response from getting speed array"
+                return
+            }
+            let spdArrayMax = String( header[1] )
+//            speedArrayMax = Int( spdArrayMax ) ?? 9
+            // Here we update the Speed object, speed
+            for paramString in params {
+                let entry = paramString.split(separator: " ")
+                if entry[0] != "S" {
+                    let optIndex = Int( String( entry[0] ) )
+                    let optLeft = Int( String( entry[1] ) )
+                    let optRight = Int( String( entry[2] ) )
+                    guard let index = optIndex, let left = optLeft, let right = optRight else {
+                        responseString += "\nSpeed array access - invalid index values"
+                        return
+                    }
+                    responseString += "\n\(index): \(left) - \(right)"
+
+//                    speedArray[index!] = SpeedEntry( left: left!, right: right! )
+                }
+            }
+
+//            speedArrayHasChanged = false
+//            updateSpeedDisplayFor( index: 1 )
+//
+//            speedIndexStepper.value = 1.0
+//            speedIndexStepper.minimumValue = Double(-speedArrayMax + 1)
+//            speedIndexStepper.maximumValue = Double(speedArrayMax - 1)
+        default:
+            responseString += "\n" + message
+        }
     }
 
 	public func doBreakConnection() {
@@ -82,7 +126,7 @@ public class Sender: ObservableObject {
 	}
 	
 	public func doMakeConnection( to address: String, at port: UInt16 ) -> Bool {
-        updateResponse("Connect to device \(address) using \(useDatagramProtocol ? "UDP" : "TCP")")
+        updateResponse("Connect to device \(address) at port \(port) using \(useDatagramProtocol ? "UDP" : "TCP")")
         if socketfd != 0 {
             close( socketfd )
             socketfd = 0
@@ -102,7 +146,7 @@ public class Sender: ObservableObject {
         let result = doConnect( targetAddr, port: port )
         guard result >= 0 else {
 //            let strerr = strerror( errno )
-            updateResponse("Connect failed for \(targetAddr), error: \(result)") // - \(String(describing: strerr))")
+            updateResponse("Connect failed for \(targetAddr), port \(port), error: \(result)") // - \(String(describing: strerr))")
             return false
         }
         updateResponse("Connected on socket \(socketfd) on our port \(port) to host address \(address): (\(targetAddr))\n")
@@ -116,7 +160,7 @@ public class Sender: ObservableObject {
 		var hints = addrinfo(
 			ai_flags: AI_PASSIVE,       // Assign the address of my local host to the socket structures
 			ai_family: AF_INET,      	// IPv4
-            ai_socktype: SOCK_DGRAM,   // UDP -- SOCK_STREAM for TCP - Either seem to work here
+            ai_socktype: SOCK_STREAM,   // UDP -- SOCK_STREAM for TCP - Either seem to work here
 			ai_protocol: 0, ai_addrlen: 0, ai_canonname: nil, ai_addr: nil, ai_next: nil )
 		var servinfo: UnsafeMutablePointer<addrinfo>? = nil		// For the result from the getaddrinfo
 		let status = getaddrinfo( name + ".local", "5555", &hints, &servinfo)
@@ -156,7 +200,7 @@ public class Sender: ObservableObject {
 		}
 		if connectResult < 0 {
 			let stat = String( describing: strerror( errno ) )
-            updateResponse("ERROR connecting, errno: \(errno), \(stat )")
+            updateResponse("ERROR connecting \(connectResult), errno: \(errno), \(stat)")
 			return connectResult
 		}
         return connectResult
@@ -173,7 +217,7 @@ public class Sender: ObservableObject {
                     rcvLen = read(self!.socketfd, &readBuffer, 1024 )
                 }
 				if (rcvLen <= 0) {
-                    self?.updateResponse("\nConnection lost while receiving")
+                    self?.updateResponse("Connection lost while receiving, \(rcvLen)")
                     break
 				} else {
                     let str = String( cString: readBuffer, encoding: .utf8 ) ?? "bad data"
@@ -209,7 +253,7 @@ public class Sender: ObservableObject {
             sndLen = write( socketfd, &writeBuffer, Int(len) )
         }
 		if ( sndLen < 0 ) {
-            self.updateResponse("\nConnection lost while sending, \(sndLen)")
+            self.updateResponse("   Connection lost while sending, \(sndLen)")
             return false
 		}
 		return true
