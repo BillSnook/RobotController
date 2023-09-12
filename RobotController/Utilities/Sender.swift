@@ -107,6 +107,8 @@ public class Sender: ObservableObject {
 //            speedIndexStepper.value = 1.0
 //            speedIndexStepper.minimumValue = Double(-speedArrayMax + 1)
 //            speedIndexStepper.maximumValue = Double(speedArrayMax - 1)
+        case "T":
+            responseString += "\n----    Got Camera data    ----\n" + message
         default:
             responseString += "\n" + message
         }
@@ -145,13 +147,12 @@ public class Sender: ObservableObject {
         updateResponse("Found target address: \(targetAddr), connecting...")
         let result = doConnect( targetAddr, port: port )
         guard result >= 0 else {
-//            let strerr = strerror( errno )
-            updateResponse("Connect failed for \(targetAddr), port \(port), error: \(result)") // - \(String(describing: strerr))")
+            updateResponse("Connect failed for \(targetAddr), port \(port), error: \(result)")
             return false
         }
         updateResponse("Connected on socket \(socketfd) on our port \(port) to host address \(address): (\(targetAddr))\n")
 
-        readThread()    // Loop waiting for response
+        readThread()    // Loop waiting for response, exits on read error
         
 		return true
 	}
@@ -222,15 +223,16 @@ public class Sender: ObservableObject {
 				} else {
                     let str = String( cString: readBuffer, encoding: .utf8 ) ?? "bad data"
                     self?.updateResponse(str)
-//                    self?.updateResponse("Read \(rcvLen) bytes from socket \(self!.socketfd):\n  \(str)")
+//                    self?.updateResponse("Read \(rcvLen) bytes from socket \(self!.socketfd):\n-- \(str) --\n")
 				}
 			}
-		}
-        DispatchQueue.main.async {
+            // If we get here, read has received an error which usually means a comm failure on the robot
+            DispatchQueue.main.async {
 //            self.deadTime.invalidate()
 //            self.deadTime = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(timerStart), userInfo: nil, repeats: false )
-            self.sendPi( "@" )
-        }
+                self?.sendPi( "@" )
+            }
+		}
 	}
 	
     @discardableResult public func sendPi( _ message: String ) -> Bool {
