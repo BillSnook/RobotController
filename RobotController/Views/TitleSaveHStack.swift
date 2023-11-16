@@ -17,7 +17,6 @@ struct TitleSaveHStack: View {
     var body: some View {
         HStack {
             Button("Reset") {
-                print("Reset button action")
                 resetFile()
             }
             .buttonStyle(.bordered)
@@ -28,7 +27,6 @@ struct TitleSaveHStack: View {
 //                .fontWeight(.semibold)
             Spacer()
             Button("Save") {
-                print("Save button action")
                 saveFile()
             }
             .buttonStyle(.bordered)

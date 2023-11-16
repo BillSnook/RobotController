@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct MotorSettings: View {
-    @State private var forwardReverse = true
     @State private var left = "0"
     @State private var right = "0"
 
+    var forwardReverse = true
+    
     var body: some View {
         HStack {
             Text("L")
@@ -21,14 +22,21 @@ struct MotorSettings: View {
 //                .cornerRadius(8.0)
                 .border(.black)
             Spacer()
-            Toggle(isOn: $forwardReverse) {
-                if forwardReverse {
-                    Text("Forward")
-                } else {
-                    Text("Reverse")
-                }
+            if forwardReverse {
+                Text("Forward")
+                    .font(.headline)
+            } else {
+                Text("Reverse")
+                    .font(.headline)
             }
-            .frame(width: 120.0)
+//            Toggle(isOn: $forwardReverse) {
+//                if forwardReverse {
+//                    Text("Forward")
+//                } else {
+//                    Text("Reverse")
+//                }
+//            }
+//            .frame(width: 120.0)
             Spacer()
             TextField("Placeholder", text: $right)
                 .multilineTextAlignment(.center)

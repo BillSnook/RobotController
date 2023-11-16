@@ -8,7 +8,6 @@
 import SwiftUI
 
 let targetPort = Sender()
-let speed = Speed(8)
 
 @main
 struct RobotControllerApp: App {

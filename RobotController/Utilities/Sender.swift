@@ -28,7 +28,7 @@ enum ConnectionState: String {          // State of communication channel to dev
 }
 
 public class Sender: ObservableObject {
-    @Published var connectionState: ConnectionState = .disconnected    // For testing buttons, connected, else normally disconnected
+    @Published var connectionState: ConnectionState = .connected    // For testing buttons, connected, else normally disconnected
     @Published var responseString: String = "Ready..."
 
     var socketfd: Int32 = 0
@@ -108,10 +108,18 @@ public class Sender: ObservableObject {
 //            speedIndexStepper.minimumValue = Double(-speedArrayMax + 1)
 //            speedIndexStepper.maximumValue = Double(speedArrayMax - 1)
         case "T":
-            responseString += "\n----    Got Camera data    ----\n" + message
+            responseString += "\n----    Got Camera data, deprecated    ----\n" + message
         default:
             responseString += "\n" + message
         }
+    }
+
+    // Here we have an array of bytes corresponding to the depth data from the tof camera
+    // (with the two byte header, C0). For just one center line for now, 240 bytes.
+    private func sendData(_ message: [CChar]) {
+
+
+        responseString = "\nGot tof camera data\n"
     }
 
 	public func doBreakConnection() {
@@ -217,13 +225,17 @@ public class Sender: ObservableObject {
                 } else {
                     rcvLen = read(self!.socketfd, &readBuffer, 1024 )
                 }
-				if (rcvLen <= 0) {
+				if rcvLen <= 0 {
                     self?.updateResponse("Connection lost while receiving, \(rcvLen)")
                     break
 				} else {
-                    let str = String( cString: readBuffer, encoding: .utf8 ) ?? "bad data"
-                    self?.updateResponse(str)
-//                    self?.updateResponse("Read \(rcvLen) bytes from socket \(self!.socketfd):\n-- \(str) --\n")
+                    if readBuffer.first == 0x43 {
+                        self?.sendData(readBuffer)
+                    } else {
+                        let str = String( cString: readBuffer, encoding: .utf8 ) ?? "bad data"
+                        self?.updateResponse(str)
+//                        self?.updateResponse("Read \(rcvLen) bytes from socket \(self!.socketfd):\n-- \(str) --\n")
+                    }
 				}
 			}
             // If we get here, read has received an error which usually means a comm failure on the robot

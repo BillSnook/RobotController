@@ -12,13 +12,16 @@ struct CalibrateView: View {
         VStack {
             Text("Calibrate!")
             VStack {
-                TitleSaveHStack(title: "Scanner Alignment", fileName: "ScannerAlignment")
-                    .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
-                Text("--------------------")
+//                TitleSaveHStack(title: "Scanner Alignment", fileName: "ScannerAlignment")
+//                    .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
+//                Text("--------------------")
                 TitleSaveHStack(title: "Speed Alignment", fileName: "SpeedAlignment")
                     .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
-                MotorActions()
                 SpeedIndexSelect()
+                Spacer()
+                    .frame(height: 20.0)
+                MotorActions()
+                Spacer()
             }
             Spacer()
         }
