@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SpeedIndexSelect: View {
+struct SpeedIndexSetup: View {
     @StateObject private var speed = Speed.shared
 
 //    @State private var leftString = "511"
@@ -92,7 +92,7 @@ struct SpeedIndexSelect: View {
 
 struct SpeedIndexSelect_Previews: PreviewProvider {
     static var previews: some View {
-        SpeedIndexSelect()
+        SpeedIndexSetup()
             .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MotorActions: View {
+struct TestSpeedSetting: View {
     var body: some View {
         HStack {
             Button("Run") {
@@ -31,7 +31,7 @@ struct MotorActions: View {
 
 struct MotorActions_Previews: PreviewProvider {
     static var previews: some View {
-        MotorActions()
+        TestSpeedSetting()
             .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
     }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TitleSaveHStack: View {
+struct TitleFileActions: View {
     let fileLead = "/home/data/"
     let fileType = ".dat"
     
@@ -16,7 +16,7 @@ struct TitleSaveHStack: View {
 
     var body: some View {
         HStack {
-            Button("Reset") {
+            Button("Load") {
                 resetFile()
             }
             .buttonStyle(.bordered)
@@ -50,7 +50,7 @@ struct TitleSaveHStack: View {
 
 struct TitleSaveHStack_Previews: PreviewProvider {
     static var previews: some View {
-        TitleSaveHStack(title: "Alignment", fileName: "AlignmentTest")
+        TitleFileActions(title: "Alignment", fileName: "AlignmentTest")
             .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
     }
 }
