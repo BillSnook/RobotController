@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A91D80582A7EC86700851EBF /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D80572A7EC86700851EBF /* Speed.swift */; };
-		A9223F4A2A71D1B9008C6112 /* SpeedIndexSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9223F492A71D1B9008C6112 /* SpeedIndexSelect.swift */; };
-		A92B09002A704EA500777853 /* MotorActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B08FF2A704EA500777853 /* MotorActions.swift */; };
-		A92B09022A70540D00777853 /* MotorSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B09012A70540D00777853 /* MotorSettings.swift */; };
+		A9223F4A2A71D1B9008C6112 /* SpeedIndexSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9223F492A71D1B9008C6112 /* SpeedIndexSetup.swift */; };
+		A92B09002A704EA500777853 /* TestSpeedSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B08FF2A704EA500777853 /* TestSpeedSetting.swift */; };
+		A92B09022A70540D00777853 /* SpeedFileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B09012A70540D00777853 /* SpeedFileActions.swift */; };
 		A93F51DA2A46253F00CA3CF7 /* RobotControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51D92A46253F00CA3CF7 /* RobotControllerApp.swift */; };
 		A93F51DC2A46253F00CA3CF7 /* StartupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51DB2A46253F00CA3CF7 /* StartupView.swift */; };
 		A93F51DE2A46254000CA3CF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93F51DD2A46254000CA3CF7 /* Assets.xcassets */; };
@@ -20,14 +20,14 @@
 		A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */; };
 		A954C7242A66062E0019DF7F /* CalibrateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A954C7232A66062E0019DF7F /* CalibrateView.swift */; };
 		A954C7262A6606670019DF7F /* DriveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A954C7252A6606670019DF7F /* DriveView.swift */; };
-		A954C7272A68636C0019DF7F /* TitleSaveHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */; };
+		A954C7272A68636C0019DF7F /* TitleFileActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7E0102A63A60100C97DC2 /* TitleFileActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A91D80572A7EC86700851EBF /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
-		A9223F492A71D1B9008C6112 /* SpeedIndexSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedIndexSelect.swift; sourceTree = "<group>"; };
-		A92B08FF2A704EA500777853 /* MotorActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotorActions.swift; sourceTree = "<group>"; };
-		A92B09012A70540D00777853 /* MotorSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotorSettings.swift; sourceTree = "<group>"; };
+		A9223F492A71D1B9008C6112 /* SpeedIndexSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedIndexSetup.swift; sourceTree = "<group>"; };
+		A92B08FF2A704EA500777853 /* TestSpeedSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSpeedSetting.swift; sourceTree = "<group>"; };
+		A92B09012A70540D00777853 /* SpeedFileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFileActions.swift; sourceTree = "<group>"; };
 		A93F51D62A46253F00CA3CF7 /* RobotController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RobotController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A93F51D92A46253F00CA3CF7 /* RobotControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RobotControllerApp.swift; sourceTree = "<group>"; };
 		A93F51DB2A46253F00CA3CF7 /* StartupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupView.swift; sourceTree = "<group>"; };
@@ -38,7 +38,7 @@
 		A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
 		A954C7232A66062E0019DF7F /* CalibrateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateView.swift; sourceTree = "<group>"; };
 		A954C7252A6606670019DF7F /* DriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveView.swift; sourceTree = "<group>"; };
-		A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSaveHStack.swift; sourceTree = "<group>"; };
+		A9B7E0102A63A60100C97DC2 /* TitleFileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFileActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,10 +57,10 @@
 			children = (
 				A93F51EE2A490B3D00CA3CF7 /* ConnectView.swift */,
 				A93F51EC2A46262C00CA3CF7 /* SendCommandView.swift */,
-				A9B7E0102A63A60100C97DC2 /* TitleSaveHStack.swift */,
-				A92B08FF2A704EA500777853 /* MotorActions.swift */,
-				A92B09012A70540D00777853 /* MotorSettings.swift */,
-				A9223F492A71D1B9008C6112 /* SpeedIndexSelect.swift */,
+				A9B7E0102A63A60100C97DC2 /* TitleFileActions.swift */,
+				A92B09012A70540D00777853 /* SpeedFileActions.swift */,
+				A9223F492A71D1B9008C6112 /* SpeedIndexSetup.swift */,
+				A92B08FF2A704EA500777853 /* TestSpeedSetting.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,16 +193,16 @@
 			files = (
 				A93F51DC2A46253F00CA3CF7 /* StartupView.swift in Sources */,
 				A93F51ED2A46262C00CA3CF7 /* SendCommandView.swift in Sources */,
-				A9223F4A2A71D1B9008C6112 /* SpeedIndexSelect.swift in Sources */,
+				A9223F4A2A71D1B9008C6112 /* SpeedIndexSetup.swift in Sources */,
 				A91D80582A7EC86700851EBF /* Speed.swift in Sources */,
-				A92B09022A70540D00777853 /* MotorSettings.swift in Sources */,
+				A92B09022A70540D00777853 /* SpeedFileActions.swift in Sources */,
 				A93F51E82A46258300CA3CF7 /* Sender.swift in Sources */,
 				A93F51EF2A490B3D00CA3CF7 /* ConnectView.swift in Sources */,
 				A954C7242A66062E0019DF7F /* CalibrateView.swift in Sources */,
 				A93F51DA2A46253F00CA3CF7 /* RobotControllerApp.swift in Sources */,
-				A92B09002A704EA500777853 /* MotorActions.swift in Sources */,
+				A92B09002A704EA500777853 /* TestSpeedSetting.swift in Sources */,
 				A954C7262A6606670019DF7F /* DriveView.swift in Sources */,
-				A954C7272A68636C0019DF7F /* TitleSaveHStack.swift in Sources */,
+				A954C7272A68636C0019DF7F /* TitleFileActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

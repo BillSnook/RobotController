@@ -1,5 +1,5 @@
 //
-//  SpeedActions.swift
+//  SpeedFileActions.swift
 //  RobotController
 //
 //  Created by Bill Snook on 7/25/23.
@@ -12,37 +12,43 @@ struct SpeedFileActions: View {
     var body: some View {
         HStack {
             Button("Fill Forward") {
-                print("Fill Forward button action to fill forward list")
+                print("Fill Forward button action to fill forward entries")
             }
             .buttonStyle(.bordered)
 
             Spacer()
             Button("Reset") {
-                print("Reset button action to set to default speed index settings")
+                print("Reset button action to set default speed index entry settings")
                 presentDialog = true
             }
             .buttonStyle(.bordered)
             .confirmationDialog(
-                "This will return the speed index to the default settings",
+                "This will return the speed index entries to their default settings",
                 isPresented: $presentDialog)
             {
-                Button("Reset to unmodified state", role: .destructive) {
-                    print("Resetting to unmodified state")
+                Button("Reset to initial unmodified state", role: .destructive) {
+                    print("Resetting to default state")
+                    resetSpeedModel()
+
                 }
             } message: {
-                Text("You cannot undo this action.")
+                Text("This will replace any unsaved changes with the default initial set of entries.\nYou cannot undo this action.")
             }
 
             Spacer()
             Button("Fill Reverse") {
-                print("Fill Reverse button action to fill reverse list")
+                print("Fill Reverse button action to fill reverse entries")
             }
             .buttonStyle(.bordered)
         }
     }
+
+    func resetSpeedModel() {
+        speedIndex.setup()
+    }
 }
 
-struct SpeedActions_Previews: PreviewProvider {
+struct SpeedFileActions_Previews: PreviewProvider {
     static var previews: some View {
         SpeedFileActions()
             .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))

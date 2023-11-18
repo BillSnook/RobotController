@@ -19,6 +19,7 @@ struct ConnectView: View {
     enum Devices: String, CaseIterable, Identifiable {
         case camera01
         case donald
+        case goofy
         case hughie
         case dewie
         case louie
@@ -36,7 +37,7 @@ struct ConnectView: View {
     // This is the Sender object and here we get updates whenever any of it's @Published object changes
     @ObservedObject var commObject = targetPort
 
-    @State private var selectedDevice: Devices = .donald
+    @State private var selectedDevice: Devices = .goofy
 
     var connectionRequest: ConnectionRequest = .connect
 

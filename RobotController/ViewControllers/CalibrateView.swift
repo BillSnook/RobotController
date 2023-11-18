@@ -12,15 +12,21 @@ struct CalibrateView: View {
         VStack {
             Text("Calibrate!")
             VStack {
-//                TitleSaveHStack(title: "Scanner Alignment", fileName: "ScannerAlignment")
+//                TitleFileActions(title: "Scanner Alignment", fileName: "ScannerAlignment")
 //                    .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
 //                Text("--------------------")
-                TitleSaveHStack(title: "Speed Alignment", fileName: "SpeedAlignment")
+                TitleFileActions(title: "Speed Alignment", fileName: "SpeedAlignment")
                     .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
-                SpeedIndexSelect()
                 Spacer()
                     .frame(height: 20.0)
-                MotorActions()
+                SpeedFileActions()
+                Spacer()
+                    .frame(height: 10.0)
+                SpeedIndexSetup()
+//                    .background(.green)
+                Spacer()
+                    .frame(height: 20.0)
+                TestSpeedSetting()
                 Spacer()
             }
             Spacer()
@@ -32,5 +38,6 @@ struct CalibrateView: View {
 struct CalibrateView_Previews: PreviewProvider {
     static var previews: some View {
         CalibrateView()
+            .previewLayout(.sizeThatFits)
     }
 }

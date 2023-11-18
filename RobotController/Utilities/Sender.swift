@@ -26,9 +26,10 @@ enum ConnectionState: String {          // State of communication channel to dev
         }
     }
 }
+let initialState: ConnectionState = .disconnected    // For testing buttons, useconnected, else use disconnected
 
 public class Sender: ObservableObject {
-    @Published var connectionState: ConnectionState = .connected    // For testing buttons, connected, else normally disconnected
+    @Published var connectionState: ConnectionState = initialState
     @Published var responseString: String = "Ready..."
 
     var socketfd: Int32 = 0
@@ -76,37 +77,7 @@ public class Sender: ObservableObject {
 //            pwmIsValid = true
 //            pinIsValid = true
         case "S":
-            let params = message.split(separator: "\n")
-            let header = params[0].split(separator: " ")
-            guard header.count == 2 else {
-                responseString += "\nSpeed array access - invalid response from getting speed array"
-                return
-            }
-            let spdArrayMax = String( header[1] )
-//            speedArrayMax = Int( spdArrayMax ) ?? 9
-            // Here we update the Speed object, speed
-            for paramString in params {
-                let entry = paramString.split(separator: " ")
-                if entry[0] != "S" {
-                    let optIndex = Int( String( entry[0] ) )
-                    let optLeft = Int( String( entry[1] ) )
-                    let optRight = Int( String( entry[2] ) )
-                    guard let index = optIndex, let left = optLeft, let right = optRight else {
-                        responseString += "\nSpeed array access - invalid index values"
-                        return
-                    }
-                    responseString += "\n\(index): \(left) - \(right)"
-
-//                    speedArray[index!] = SpeedEntry( left: left!, right: right! )
-                }
-            }
-
-//            speedArrayHasChanged = false
-//            updateSpeedDisplayFor( index: 1 )
-//
-//            speedIndexStepper.value = 1.0
-//            speedIndexStepper.minimumValue = Double(-speedArrayMax + 1)
-//            speedIndexStepper.maximumValue = Double(speedArrayMax - 1)
+            speedIndex.setup(message)
         case "T":
             responseString += "\n----    Got Camera data, deprecated    ----\n" + message
         default:
@@ -242,7 +213,7 @@ public class Sender: ObservableObject {
             DispatchQueue.main.async {
 //            self.deadTime.invalidate()
 //            self.deadTime = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(timerStart), userInfo: nil, repeats: false )
-                self?.sendPi( "@" )
+                self?.sendPi( "@" ) // Get status
             }
 		}
 	}
@@ -267,7 +238,7 @@ public class Sender: ObservableObject {
             sndLen = write( socketfd, &writeBuffer, Int(len) )
         }
 		if ( sndLen < 0 ) {
-            self.updateResponse("   Connection lost while sending, \(sndLen)")
+//            self.updateResponse("   Connection lost while sending, \(sndLen)")
             return false
 		}
 		return true

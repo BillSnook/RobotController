@@ -1,5 +1,5 @@
 //
-//  MotorActions.swift
+//  TestSpeedSetting.swift
 //  RobotController
 //
 //  Created by Bill Snook on 7/25/23.
@@ -29,7 +29,7 @@ struct TestSpeedSetting: View {
     }
 }
 
-struct MotorActions_Previews: PreviewProvider {
+struct TestSpeedSetting_Previews: PreviewProvider {
     static var previews: some View {
         TestSpeedSetting()
             .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))

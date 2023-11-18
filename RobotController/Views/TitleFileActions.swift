@@ -1,5 +1,5 @@
 //
-//  TitleSaveHStack.swift
+//  TitleFileActions.swift
 //  RobotController
 //
 //  Created by Bill Snook on 7/15/23.
@@ -17,7 +17,7 @@ struct TitleFileActions: View {
     var body: some View {
         HStack {
             Button("Load") {
-                resetFile()
+                loadFile()
             }
             .buttonStyle(.bordered)
             
@@ -37,8 +37,9 @@ struct TitleFileActions: View {
         return fileLead + fileName + fileType
     }
 
-    private func resetFile() {
-        print("Resetting file at \(getFilePath())")
+    private func loadFile() {
+        print("Loading file at \(getFilePath())")
+        targetPort.sendPi("D")  // Request speed file data from device
         // TBD
     }
 
@@ -48,7 +49,7 @@ struct TitleFileActions: View {
     }
 }
 
-struct TitleSaveHStack_Previews: PreviewProvider {
+struct TitleFileActions_Previews: PreviewProvider {
     static var previews: some View {
         TitleFileActions(title: "Alignment", fileName: "AlignmentTest")
             .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))

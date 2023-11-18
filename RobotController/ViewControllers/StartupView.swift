@@ -32,6 +32,7 @@ struct StartupView: View {
                                 Button("Calibrate") {
                                     print("Calibrate nav link")
                                     path.append("CalibrateView")
+                                    commObject.sendPi("D")          // Request device speedIndex data
                                 }
                                 .buttonStyle(.bordered)
 
@@ -51,7 +52,7 @@ struct StartupView: View {
                             HStack {
                                 Button("Status") {
                                     print("Send Status Request")
-                                    commObject.sendPi( "D" )
+                                    commObject.sendPi( "@" )
                                     commObject.responseString = "\nSent Status Request\n"
                                 }
                                 .buttonStyle(.bordered)

@@ -1,5 +1,5 @@
 //
-//  SpeedIndexSelect.swift
+//  SpeedIndexSetup.swift
 //  RobotController
 //
 //  Created by Bill Snook on 7/26/23.
@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SpeedIndexSetup: View {
-    @StateObject private var speed = Speed.shared
+    @StateObject private var speed = speedIndex
 
-//    @State private var leftString = "511"
-//    @State private var rightString = "511"
+//    @State var leftString : String
+//    @State var rightString : String
 
     var body: some View {
         HStack {
@@ -34,16 +34,16 @@ struct SpeedIndexSetup: View {
                             Text("L")
                             Slider(value: $speed.leftFloat, in: 0...2047, step: 64,
                                    onEditingChanged: { editing in
-//                                leftString = String(Int(speed.leftFloat))
-//                                speed.left[selectedIndex] = Int(leftFloat)
+                               // If running, may want to send updated speed value to device to see result
+//                                leftString = speed.leftString
                             })
                         }
                         HStack {
                             Text("R")
                             Slider(value: $speed.rightFloat, in: 0...2047, step: 64,
                                    onEditingChanged: { editing in
-//                                rightString = String(Int(rightFloat))
-//                                speed.right[selectedIndex] = Int(rightFloat)
+                                // If running, may want to send updated speed value to device to see result
+//                                rightString = speed.rightString
                            })
                         }
                     }
@@ -54,13 +54,17 @@ struct SpeedIndexSetup: View {
                         .multilineTextAlignment(.center)
                         .frame(width: 80.0)
                         .border(.black)
-//                        .onSubmit {
+                        .onSubmit {
+                            // If running, may want to send updated speed value to device to see result
+                            print("In onSubmit for left string update")
 //                            speed.leftString = leftString
-////                            speed.left[speed.selectedIndex] = Int(speed.leftString) ?? 0
-//                        }
+                        }
                     Spacer()
-                    if speed.selectedIndex >= 0 {
+                    if speed.selectedIndex > 0 {
                         Text("Forward")
+                            .font(.headline)
+                    } else if speed.selectedIndex == 0 {
+                        Text("Stopped")
                             .font(.headline)
                     } else {
                         Text("Reverse")
@@ -79,10 +83,11 @@ struct SpeedIndexSetup: View {
                         .multilineTextAlignment(.center)
                         .frame(width: 80.0)
                         .border(.black)
-//                        .onSubmit {
-//                            speed.rightString = rightString
-////                            speed.right[speed.selectedIndex] = Int(speed.rightString) ?? 0
-//                        }
+                        .onSubmit {
+                            // If running, may want to send updated speed value to device to see result
+                            print("In onSubmit for right string update")
+ //                           speed.rightString = rightString
+                        }
                     Text("R")
                 }
             }
@@ -90,7 +95,7 @@ struct SpeedIndexSetup: View {
     }
 }
 
-struct SpeedIndexSelect_Previews: PreviewProvider {
+struct SpeedIndexSetup_Previews: PreviewProvider {
     static var previews: some View {
         SpeedIndexSetup()
             .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
