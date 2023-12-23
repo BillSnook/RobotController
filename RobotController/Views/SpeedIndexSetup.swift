@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SpeedIndexSetup: View {
+    @ObservedObject var commObject = targetPort
+
     @StateObject private var speed = speedIndex
 
 //    @State var leftString : String
@@ -21,8 +23,8 @@ struct SpeedIndexSetup: View {
                     Picker("S", selection: $speed.internalIndex) {
                         ForEach(-8..<9) { speedIdx in
                             Text("\(speedIdx)")
-                                .font(.title)
-                                .fontWeight(.semibold)
+                                .font(.title2)
+                                .fontWeight(.regular)
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
@@ -32,18 +34,18 @@ struct SpeedIndexSetup: View {
                     VStack {
                         HStack {
                             Text("L")
-                            Slider(value: $speed.leftFloat, in: 0...2047, step: 64,
+                            Slider(value: $speed.leftFloat, in: 0...4095, step: 256,
                                    onEditingChanged: { editing in
                                // If running, may want to send updated speed value to device to see result
-//                                leftString = speed.leftString
+                                commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
                             })
                         }
                         HStack {
                             Text("R")
-                            Slider(value: $speed.rightFloat, in: 0...2047, step: 64,
+                            Slider(value: $speed.rightFloat, in: 0...4095, step: 256,
                                    onEditingChanged: { editing in
                                 // If running, may want to send updated speed value to device to see result
-//                                rightString = speed.rightString
+                                commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
                            })
                         }
                     }
@@ -57,7 +59,7 @@ struct SpeedIndexSetup: View {
                         .onSubmit {
                             // If running, may want to send updated speed value to device to see result
                             print("In onSubmit for left string update")
-//                            speed.leftString = leftString
+                            commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
                         }
                     Spacer()
                     if speed.selectedIndex > 0 {
@@ -86,7 +88,7 @@ struct SpeedIndexSetup: View {
                         .onSubmit {
                             // If running, may want to send updated speed value to device to see result
                             print("In onSubmit for right string update")
- //                           speed.rightString = rightString
+                            commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
                         }
                     Text("R")
                 }

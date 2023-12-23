@@ -67,7 +67,7 @@ public class Sender: ObservableObject {
 
     private func updateResponse(_ message: String) {
 
-        print(">> \(message)")
+//        print(">> \(message)")
         switch message.first {
         case "R":
             let params = message.split(separator: " ")
@@ -77,6 +77,7 @@ public class Sender: ObservableObject {
 //            pwmIsValid = true
 //            pinIsValid = true
         case "S":
+            print(">> Got speed index file from robot")
             speedIndex.setup(message)
         case "T":
             responseString += "\n----    Got Camera data, deprecated    ----\n" + message
@@ -210,11 +211,11 @@ public class Sender: ObservableObject {
 				}
 			}
             // If we get here, read has received an error which usually means a comm failure on the robot
-            DispatchQueue.main.async {
-//            self.deadTime.invalidate()
-//            self.deadTime = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(timerStart), userInfo: nil, repeats: false )
-                self?.sendPi( "@" ) // Get status
-            }
+//            DispatchQueue.main.async {
+////            self.deadTime.invalidate()
+////            self.deadTime = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(timerStart), userInfo: nil, repeats: false )
+//                self?.sendPi( "@" ) // Get status
+//            }
 		}
 	}
 	
@@ -224,7 +225,10 @@ public class Sender: ObservableObject {
             updateResponse("Socket not connected while sending \(message)")
             return false
         }
-//        updateResponse("sendPi is sending the message \(message)")
+
+        if (message.count > 2) {
+            updateResponse("sendPi is sending the message \(message)")
+        }
         deadTime.invalidate()
         deadTime = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false )
         let command = message + "\0";

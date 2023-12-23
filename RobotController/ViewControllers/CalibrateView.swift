@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CalibrateView: View {
+
     var body: some View {
         VStack {
             Text("Calibrate!")

@@ -11,29 +11,29 @@ struct SpeedFileActions: View {
     @State private var presentDialog = false
     var body: some View {
         HStack {
-            Button("Fill Forward") {
-                print("Fill Forward button action to fill forward entries")
+            Button("Fill Index") {
+                print("Fill button action to fill forward entries")
             }
             .buttonStyle(.bordered)
 
-            Spacer()
-            Button("Reset") {
-                print("Reset button action to set default speed index entry settings")
-                presentDialog = true
-            }
-            .buttonStyle(.bordered)
-            .confirmationDialog(
-                "This will return the speed index entries to their default settings",
-                isPresented: $presentDialog)
-            {
-                Button("Reset to initial unmodified state", role: .destructive) {
-                    print("Resetting to default state")
-                    resetSpeedModel()
-
-                }
-            } message: {
-                Text("This will replace any unsaved changes with the default initial set of entries.\nYou cannot undo this action.")
-            }
+//            Spacer()
+//            Button("Reset") {
+//                print("Reset button action to set default speed index entry settings")
+//                presentDialog = true
+//            }
+//            .buttonStyle(.bordered)
+////            .confirmationDialog(
+////                "This will return the speed index entries to their default settings",
+////                isPresented: $presentDialog)
+////            {
+////                Button("Reset to initial unmodified state", role: .destructive) {
+////                    print("Resetting to default state")
+////                    resetSpeedModel()
+////
+////                }
+////            } message: {
+////                Text("This will replace any unsaved changes with the default initial set of entries.\nYou cannot undo this action.")
+////            }
 
             Spacer()
             Button("Fill Reverse") {

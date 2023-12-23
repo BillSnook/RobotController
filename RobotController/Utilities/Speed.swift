@@ -16,11 +16,12 @@ import Foundation
 /// 1 is the slowest speed for a given direction and 8 is the fastest. Our controller sends these indexes to
 /// set the current speed.
 
+//            left | right
 // -8 7 6 5 4 3 2 1 0 1 2 3 4 5 6 7 8   selectedIndex   displayIndex
 //  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6   internalIndex   arrayIndex
 
-let speedArrayIndexSpace = 8
-let speedArraySpeedIncrements = 64     // 256 for testing should be able to use 512 (2048 vs 4096 top end)
+let defaultSpeedArrayIndexSpace = 8
+let speedArraySpeedIncrements = 128     // 256 for testing should be able to use 512 (2048 vs 4096 top end)
 
 class Speed : ObservableObject {
 
@@ -29,25 +30,26 @@ class Speed : ObservableObject {
     @Published var left = [Int]()
     @Published var right = [Int]()
 
-    @Published var internalIndex: Int = speedArrayIndexSpace + 1    // Index used internally, 0..(indexSpace * 2)
+    @Published var internalIndex: Int = defaultSpeedArrayIndexSpace + 1    // Index of slowest forward speed at start
 
-    private var indexSpace = speedArrayIndexSpace                       // Number of speed indexes; normally 8
+    var singleArray = [Int]()
 
-    private var hasValidSpeedArray = false
+    private var indexSpace = defaultSpeedArrayIndexSpace                   // Number of speed indexes; normally 8 but set by device
+
+    private var hasValidSpeedArray = false                                 // Not loaded initially, using fill in default
 
     private init() {
         setup()
     }
 
-//    var left = [Int]()
-//    var right = [Int]()
 
-    // Setup initial default speed index array
+    // Setup initial default speed index array - used as placeholder if no device version at setup time
     func setup(_ initialIndex: Int = 1) {     // No set speed data yet, create initial array
         guard !hasValidSpeedArray else {
             return
         }
-        indexSpace = speedArrayIndexSpace
+        indexSpace = defaultSpeedArrayIndexSpace
+        print("Speed.setup default indexSpace == \(indexSpace)")
         internalIndex = indexSpace + initialIndex
         left = Array(repeating: 0, count: indexSpace * 2 + 1)
         right = Array(repeating: 0, count: indexSpace * 2 + 1)
@@ -57,17 +59,19 @@ class Speed : ObservableObject {
             right[arrayIndex] = speedArraySpeedIncrements * abs(displayIndex)
             print("\(displayIndex): \(left[arrayIndex])  \(right[arrayIndex])")
         }
+        lrToSingle()
     }
 
-    // Set parameters from response from device with it's own speed index data
-    func setup(_ message: String) {
+    // Set parameters from response from device with it's speed index data
+    func setup(_ message: String, _ initialIndex: Int = 1) {
         let params = message.split(separator: "\n")
         let header = params[0].split(separator: " ")
         guard header.count == 2 else {
             return
         }
-        indexSpace = Int( header[1] ) ?? 0
-        internalIndex = indexSpace + 1
+        indexSpace = Int( header[1] ) ?? defaultSpeedArrayIndexSpace
+        print("Speed.setup devices indexSpace == \(indexSpace)")
+        internalIndex = indexSpace + initialIndex
         left = Array(repeating: 0, count: indexSpace * 2 + 1)
         right = Array(repeating: 0, count: indexSpace * 2 + 1)
         // Here we update the Speed object, speed
@@ -77,17 +81,34 @@ class Speed : ObservableObject {
                 let optIndex = Int( entry[0] )
                 let optLeft = Int( entry[1] )
                 let optRight = Int( entry[2] )
-                guard let index = optIndex, let leftValue = optLeft, let rightValue = optRight else {
-                    print("Speed.setup failing for index == \(optIndex ?? 999), internalIndex == \(internalIndex)")
-                    return
+                if let index = optIndex, let leftValue = optLeft, let rightValue = optRight {
+                    let walkingIndex = index + indexSpace
+                    if walkingIndex >= 0 {
+                        print("\(index), walkingIndex: \(walkingIndex): \(leftValue)  \(rightValue)")
+                        left[walkingIndex] = leftValue
+                        right[walkingIndex] = rightValue
+                    } else {
+                        print("Speed.setup error for index == \(index), internalIndex == \(internalIndex)")
+                    }
+                } else {
+                    print("Speed.setup error for index == \(optIndex ?? 999), internalIndex == \(internalIndex)")
                 }
-                let internalIndex = index + indexSpace
-                left[internalIndex] = leftValue
-                right[internalIndex] = rightValue
-                print("\(index): \(leftValue)  \(rightValue)")
             }
         }
+        lrToSingle()
         hasValidSpeedArray = true
+    }
+
+    func lrToSingle() {
+        for idx in 0...(2 * indexSpace) {
+            if idx < indexSpace {
+                print("lrToSingle,  left, idx: \(idx) value: \(left[idx])")
+//                singleArray[idx] = left[idx]
+            } else {
+                print("lrToSingle, right, idx: \(idx) value: \(right[idx - indexSpace]), idx - indexSpace: \(idx - indexSpace)")
+//                singleArray[idx] = right[idx - indexSpace]
+            }
+        }
     }
 
     var selectedIndex: Int {        // External usage, -indexSpace...indexSpace
@@ -100,6 +121,7 @@ class Speed : ObservableObject {
         }
         set {
             left[internalIndex] = Int(newValue)
+            singleArray[internalIndex] = Int(newValue)
         }
     }
 
@@ -109,6 +131,7 @@ class Speed : ObservableObject {
         }
         set {
             left[internalIndex] = Int(newValue) ?? 0
+            singleArray[internalIndex] = Int(newValue) ?? 0
         }
     }
 
@@ -118,6 +141,7 @@ class Speed : ObservableObject {
         }
         set {
             right[internalIndex] = Int(newValue)
+            singleArray[internalIndex - indexSpace] = Int(newValue)
         }
     }
 
@@ -127,38 +151,7 @@ class Speed : ObservableObject {
         }
         set {
             right[internalIndex] = Int(newValue) ?? 0
+            singleArray[internalIndex - indexSpace] = Int(newValue) ?? 0
         }
     }
-
-
-// Needs work to accomodate expected string with left and right array data
-//    init(_ index: Int = 0, speedFile: String) {
-//        self.indexSpace = speedArray.count
-//        self.speedArray = speedArray
-//        self.index = index
-//    }
-
-//    func getLeftString(_ index: Int) -> String {
-//        return String(left[index])
-//    }
-//
-//    func getRightString(_ index: Int) -> String {
-//        return String(right[index])
-//    }
-//
-//    func getLeftFloat(_ index: Int) -> Float {
-//        return Float(left[index])
-//    }
-//
-//    func getRightFloat(_ index: Int) -> Float {
-//        return Float(right[index])
-//    }
-//
-//    func setLeft(_ index: Int, _ value: Int) {
-//        left[index] = value
-//    }
-//
-//    func setRight(_ index: Int, _ value: Int) {
-//        right[index] = value
-//    }
 }

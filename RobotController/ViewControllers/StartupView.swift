@@ -15,7 +15,6 @@ struct StartupView: View {
 
     init() {
         commObject.responseString = "\nStarting ...\n"
-//        commObject.sendPi( "@" )
     }
 
     var body: some View {
@@ -60,6 +59,7 @@ struct StartupView: View {
                                 Spacer()
                                 Button("Range") {
                                 }
+                                
                                 .buttonStyle(.bordered)
 
                                 Spacer()

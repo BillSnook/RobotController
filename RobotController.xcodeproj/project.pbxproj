@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A90DEBE82B364C2E004A2FE7 /* SpeedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90DEBE72B364C2E004A2FE7 /* SpeedChart.swift */; };
 		A91D80582A7EC86700851EBF /* Speed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91D80572A7EC86700851EBF /* Speed.swift */; };
 		A9223F4A2A71D1B9008C6112 /* SpeedIndexSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9223F492A71D1B9008C6112 /* SpeedIndexSetup.swift */; };
 		A92B09002A704EA500777853 /* TestSpeedSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B08FF2A704EA500777853 /* TestSpeedSetting.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A90DEBE72B364C2E004A2FE7 /* SpeedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedChart.swift; sourceTree = "<group>"; };
 		A91D80572A7EC86700851EBF /* Speed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speed.swift; sourceTree = "<group>"; };
 		A9223F492A71D1B9008C6112 /* SpeedIndexSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedIndexSetup.swift; sourceTree = "<group>"; };
 		A92B08FF2A704EA500777853 /* TestSpeedSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSpeedSetting.swift; sourceTree = "<group>"; };
@@ -39,6 +41,7 @@
 		A954C7232A66062E0019DF7F /* CalibrateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateView.swift; sourceTree = "<group>"; };
 		A954C7252A6606670019DF7F /* DriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveView.swift; sourceTree = "<group>"; };
 		A9B7E0102A63A60100C97DC2 /* TitleFileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFileActions.swift; sourceTree = "<group>"; };
+		A9E37AF82B1D2F4000E78E89 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 				A92B09012A70540D00777853 /* SpeedFileActions.swift */,
 				A9223F492A71D1B9008C6112 /* SpeedIndexSetup.swift */,
 				A92B08FF2A704EA500777853 /* TestSpeedSetting.swift */,
+				A90DEBE72B364C2E004A2FE7 /* SpeedChart.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -85,9 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				A93F51D92A46253F00CA3CF7 /* RobotControllerApp.swift */,
-				A93F51EA2A4625B600CA3CF7 /* Utilities */,
+				A9E37AF82B1D2F4000E78E89 /* README.md */,
 				A93F51EB2A4625C800CA3CF7 /* ViewControllers */,
 				A92B08FE2A704BEA00777853 /* Views */,
+				A93F51EA2A4625B600CA3CF7 /* Utilities */,
 				A93F51DD2A46254000CA3CF7 /* Assets.xcassets */,
 				A93F51DF2A46254000CA3CF7 /* Preview Content */,
 			);
@@ -149,7 +154,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					A93F51D52A46253F00CA3CF7 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -203,6 +208,7 @@
 				A92B09002A704EA500777853 /* TestSpeedSetting.swift in Sources */,
 				A954C7262A6606670019DF7F /* DriveView.swift in Sources */,
 				A954C7272A68636C0019DF7F /* TitleFileActions.swift in Sources */,
+				A90DEBE82B364C2E004A2FE7 /* SpeedChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +219,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -245,6 +252,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -273,6 +281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -305,6 +314,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
