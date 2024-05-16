@@ -10,10 +10,7 @@ import SwiftUI
 struct SpeedIndexSetup: View {
     @ObservedObject var commObject = targetPort
 
-    @StateObject private var speed = speedIndex
-
-//    @State var leftString : String
-//    @State var rightString : String
+    @ObservedObject var speed = speedIndex
 
     var body: some View {
         HStack {
@@ -37,7 +34,7 @@ struct SpeedIndexSetup: View {
                             Slider(value: $speed.leftFloat, in: 0...4095, step: 256,
                                    onEditingChanged: { editing in
                                // If running, may want to send updated speed value to device to see result
-                                commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
+                                commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex].value) \(speed.right[speed.internalIndex].value)")
                             })
                         }
                         HStack {
@@ -45,7 +42,7 @@ struct SpeedIndexSetup: View {
                             Slider(value: $speed.rightFloat, in: 0...4095, step: 256,
                                    onEditingChanged: { editing in
                                 // If running, may want to send updated speed value to device to see result
-                                commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
+                                commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex].value) \(speed.right[speed.internalIndex].value)")
                            })
                         }
                     }
@@ -59,7 +56,7 @@ struct SpeedIndexSetup: View {
                         .onSubmit {
                             // If running, may want to send updated speed value to device to see result
                             print("In onSubmit for left string update")
-                            commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
+                            commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex].value) \(speed.right[speed.internalIndex].value)")
                         }
                     Spacer()
                     if speed.selectedIndex > 0 {
@@ -88,7 +85,7 @@ struct SpeedIndexSetup: View {
                         .onSubmit {
                             // If running, may want to send updated speed value to device to see result
                             print("In onSubmit for right string update")
-                            commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex]) \(speed.right[speed.internalIndex])")
+                            commObject.sendPi("E \(speed.internalIndex) \(speed.left[speed.internalIndex].value) \(speed.right[speed.internalIndex].value)")
                         }
                     Text("R")
                 }

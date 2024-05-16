@@ -9,6 +9,7 @@ This section will summarize the services we need from the robot.
 Commands from controller to robot
 
     Overview
+  For simplicity, our UI will use a smaller set of speeds than the motor can provide, using a speed index.
   The speed index table uses a small (8) range of speeds that the device recognizes for forward and reverse.
   These speeds translate on the device into the actual value sent to the motor controller for each track.
   The motor controller accepts values from 0 to 4095 and the index has values of 0 through 8.
@@ -48,8 +49,8 @@ Safe shutdown command
   
 Setup speed ranges
     D - Get working copy of the speed table from robot
-    E - modify entry, sending index and new value to the robot
-    d - Save current working copy to file for ongoing use
+    E - modify an entry, sending index and new value to the robot
+    d - Save current working copy to file for future use
     e - Fill in speed table from slowest and fastest entries, forward and reverse
 Set left track speed
 Set right track speed
@@ -69,6 +70,7 @@ Test/development support
 
     Operations
 Stop
+Test
 Recon
 Hunt
 Evade

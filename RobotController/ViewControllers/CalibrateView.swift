@@ -29,6 +29,8 @@ struct CalibrateView: View {
                     .frame(height: 20.0)
                 TestSpeedSetting()
                 Spacer()
+                SpeedChart()
+                Spacer()
             }
             Spacer()
         }

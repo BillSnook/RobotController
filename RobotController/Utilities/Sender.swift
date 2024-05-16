@@ -14,7 +14,7 @@ let useDatagramProtocol = true
 // Current expected connection state, determined by status of session with target device
 enum ConnectionState: String {          // State of communication channel to device
     case connected = "Connected"            // Ready for commands, expecting responses
-    case connecting = "Connecting"          // Actively looking for and waiting for connection
+    case connecting = "Connecting"          // Actively looking for and waiting for connection acceptance
     case disconnecting = "Disconnecting"    // Actively disconnecting from device
     case disconnected = "Disconnected"      // Currently not accepting commands, not expecting responses
     func buttonName() -> String {
@@ -26,7 +26,7 @@ enum ConnectionState: String {          // State of communication channel to dev
         }
     }
 }
-let initialState: ConnectionState = .disconnected    // For testing buttons, useconnected, else use disconnected
+let initialState: ConnectionState = .disconnected    // For testing buttons, use connected, else use disconnected
 
 public class Sender: ObservableObject {
     @Published var connectionState: ConnectionState = initialState
@@ -61,11 +61,11 @@ public class Sender: ObservableObject {
         }
     }
 
-    private func startResponse(_ message: String) {
+    func startResponse(_ message: String) {
         responseString = message
     }
 
-    private func updateResponse(_ message: String) {
+    private func updateResponse(_ message: String) {    // With message received froom device
 
 //        print(">> \(message)")
         switch message.first {
@@ -77,7 +77,7 @@ public class Sender: ObservableObject {
 //            pwmIsValid = true
 //            pinIsValid = true
         case "S":
-            print(">> Got speed index file from robot")
+            print(">> Got speed index file from device")
             speedIndex.setup(message)
         case "T":
             responseString += "\n----    Got Camera data, deprecated    ----\n" + message
@@ -108,7 +108,7 @@ public class Sender: ObservableObject {
 	}
 	
 	public func doMakeConnection( to address: String, at port: UInt16 ) -> Bool {
-        updateResponse("Connect to device \(address) at port \(port) using \(useDatagramProtocol ? "UDP" : "TCP")")
+        updateResponse(" Connect to device \(address) at port \(port) using \(useDatagramProtocol ? "UDP" : "TCP")")
         if socketfd != 0 {
             close( socketfd )
             socketfd = 0
@@ -120,17 +120,17 @@ public class Sender: ObservableObject {
         }
 
 		guard let targetAddr = doLookup( name: address ) else {
-            updateResponse("Lookup failed for \(address)")
+            updateResponse(" Lookup failed for \(address)")
 			return false
 		}
 
-        updateResponse("Found target address: \(targetAddr), connecting...")
+        updateResponse(" Found target address: \(targetAddr), connecting...")
         let result = doConnect( targetAddr, port: port )
         guard result >= 0 else {
-            updateResponse("Connect failed for \(targetAddr), port \(port), error: \(result)")
+            updateResponse(" Connect failed for \(targetAddr), port \(port), error: \(result)")
             return false
         }
-        updateResponse("Connected on socket \(socketfd) on our port \(port) to host address \(address): (\(targetAddr))\n")
+        updateResponse(" Connected on socket \(socketfd) on our port \(port) to host address \(address): (\(targetAddr))\n")
 
         readThread()    // Loop waiting for response, exits on read error
         
@@ -147,7 +147,7 @@ public class Sender: ObservableObject {
 		let status = getaddrinfo( name + ".local", "5555", &hints, &servinfo)
 		guard status == 0 else {
 //			let stat = strerror( errno )
-            updateResponse("Address lookup failed for \(name), status: \(status)") // , error: \(String(describing: stat))")
+            updateResponse(" Address lookup failed for \(name), status: \(status)") // , error: \(String(describing: stat))")
 			return nil
 		}
 		
@@ -163,7 +163,7 @@ public class Sender: ObservableObject {
 				target = ipaddrstr
 				break						// Get first valid IPV4 address
 			}
-            updateResponse("Got target address: \(String(describing: target))")
+            updateResponse(" Got target address: \(String(describing: target))")
 			info = info!.pointee.ai_next
 		}
 		freeaddrinfo( servinfo )
@@ -181,7 +181,7 @@ public class Sender: ObservableObject {
 		}
 		if connectResult < 0 {
 			let stat = String( describing: strerror( errno ) )
-            updateResponse("ERROR connecting \(connectResult), errno: \(errno), \(stat)")
+            updateResponse(" ERROR connecting \(connectResult), errno: \(errno), \(stat)")
 			return connectResult
 		}
         return connectResult
@@ -198,15 +198,15 @@ public class Sender: ObservableObject {
                     rcvLen = read(self!.socketfd, &readBuffer, 1024 )
                 }
 				if rcvLen <= 0 {
-                    self?.updateResponse("Connection lost while receiving, \(rcvLen)")
+                    self?.updateResponse(" Connection lost while receiving, \(rcvLen)")
                     break
 				} else {
                     if readBuffer.first == 0x43 {
                         self?.sendData(readBuffer)
                     } else {
                         let str = String( cString: readBuffer, encoding: .utf8 ) ?? "bad data"
-                        self?.updateResponse(str)
-//                        self?.updateResponse("Read \(rcvLen) bytes from socket \(self!.socketfd):\n-- \(str) --\n")
+                        self?.updateResponse(" " + str)
+//                        self?.updateResponse(" Read \(rcvLen) bytes from socket \(self!.socketfd):\n-- \(str) --\n")
                     }
 				}
 			}
@@ -222,12 +222,12 @@ public class Sender: ObservableObject {
     @discardableResult public func sendPi( _ message: String ) -> Bool {
 		
         guard connectionState == .connected else {
-            updateResponse("Socket not connected while sending \(message)")
+            updateResponse(" Socket not connected while sending \(message)")
             return false
         }
 
         if (message.count > 2) {
-            updateResponse("sendPi is sending the message \(message)")
+            updateResponse(" sendPi is sending the message \(message)")
         }
         deadTime.invalidate()
         deadTime = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: false )
@@ -263,10 +263,10 @@ public class Sender: ObservableObject {
             let connectResult = self.doMakeConnection( to: hostName, at: 5555 )
             if connectResult {
                 self.connectionState = .connected
-                self.updateResponse("Connected to host \(hostName)")
+                self.updateResponse(" Connected to host \(hostName)")
             } else {
                 self.connectionState = .disconnected
-                self.updateResponse("Failed to connect to host \(hostName)")
+                self.updateResponse(" Failed to connect to host \(hostName)")
             }
         }
     }

@@ -14,7 +14,7 @@ struct StartupView: View {
     @State private var path: [String] = []
 
     init() {
-        commObject.responseString = "\nStarting ...\n"
+        commObject.startResponse("\nStarting ...\n")
     }
 
     var body: some View {
@@ -52,19 +52,18 @@ struct StartupView: View {
                                 Button("Status") {
                                     print("Send Status Request")
                                     commObject.sendPi( "@" )
-                                    commObject.responseString = "\nSent Status Request\n"
+                                    commObject.startResponse("\nSent Status Request\n")
                                 }
                                 .buttonStyle(.bordered)
 
                                 Spacer()
                                 Button("Range") {
                                 }
-                                
                                 .buttonStyle(.bordered)
 
                                 Spacer()
                                 Button("Clear") {
-                                    commObject.responseString = ""
+                                    commObject.startResponse("")
                                 }
                                 .buttonStyle(.bordered)
                             }
