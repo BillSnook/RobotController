@@ -1,6 +1,6 @@
 //
 //  Sender.swift
-//  cartrol
+//  BotComm
 //
 //  Created by William Snook on 5/9/18.
 //  Copyright © 2018 billsnook. All rights reserved.
@@ -26,7 +26,7 @@ enum ConnectionState: String {          // State of communication channel to dev
         }
     }
 }
-let initialState: ConnectionState = .disconnected    // For testing buttons, use connected, else use disconnected
+let initialState: ConnectionState = .connected    // For testing buttons, use connected, else use disconnected
 
 public class Sender: ObservableObject {
     @Published var connectionState: ConnectionState = initialState
@@ -40,7 +40,6 @@ public class Sender: ObservableObject {
     deinit {
         doBreakConnection()
     }
-
     // Called from connect button in ConnectView to connect or disconnect to selected robot device
     func requestConnectionStateChange(_ connectionRequest: ConnectionRequest, _ hostName: String) {
         print("Sender, received \(connectionRequest.rawValue) in connection state \(connectionState.rawValue)")
@@ -78,7 +77,7 @@ public class Sender: ObservableObject {
 //            pinIsValid = true
         case "S":
             print(">> Got speed index file from device")
-            speedIndex.setup(message)
+///            speedIndex.setup(message)
         case "T":
             responseString += "\n----    Got Camera data, deprecated    ----\n" + message
         default:

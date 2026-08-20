@@ -53,7 +53,7 @@ class Speed : ObservableObject {
             return
         }
         indexSpace = defaultSpeedArrayIndexSpace
-        print("Speed.setup, default, indexSpace == \(indexSpace)")
+//        print("Speed.setup, default, indexSpace == \(indexSpace)")
         internalIndex = indexSpace + initialIndex
         left = Array(repeating: SpeedChartEntry(index: "0", value: 0), count: indexSpace * 2 + 1)
         right = Array(repeating: SpeedChartEntry(index: "0", value: 0), count: indexSpace * 2 + 1)

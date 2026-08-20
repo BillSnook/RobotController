@@ -11,6 +11,7 @@ struct CalibrateView: View {
 
     var body: some View {
         VStack {
+            Spacer(minLength: 20.0)
             Text("Calibrate!")
             VStack {
 //                TitleFileActions(title: "Scanner Alignment", fileName: "ScannerAlignment")

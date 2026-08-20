@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-let targetPort = Sender()
-let speedIndex = Speed.shared
-
 
 @main
 struct RobotControllerApp: App {
