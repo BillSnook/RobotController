@@ -1,21 +1,21 @@
 //
 //  StartupView.swift
-//  RobotController
+//  BotComm
 //
 //  Created by Bill Snook on 6/23/23.
 //
 
 import SwiftUI
 
+let targetPort = Sender()
+let speedIndex = Speed.shared
+
+
 struct StartupView: View {
 
-    @ObservedObject var commObject = targetPort
+    @StateObject var commObject = targetPort
 
     @State private var path: [String] = []
-
-    init() {
-        commObject.startResponse("\nStarting ...\n")
-    }
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -44,10 +44,12 @@ struct StartupView: View {
 
                                 Spacer()
                                 Button("Direct") {
+                                    print("Direct control  - not finished")
                                 }
                                 .buttonStyle(.bordered)
                             }
                             .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
+
                             HStack {
                                 Button("Status") {
                                     print("Send Status Request")
@@ -79,7 +81,7 @@ struct StartupView: View {
                                     print("Send Center")
                                 }
                                 .buttonStyle(.bordered)
-                                
+
                                 Spacer()
                                 Button("Stop") {
                                     print("Send Stop")
@@ -91,25 +93,26 @@ struct StartupView: View {
                     }
                 }
             }
-            .navigationBarTitle("Robot Commander", displayMode: .inline)
+            .navigationTitle("Robot Commander")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: String.self) { value in
-                switch value {
-                case "CalibrateView":
+//                switch value {
+//                case "CalibrateView":
                     CalibrateView()
-                case "ControlView":
-                    DriveView()
-                default:
-                    DriveView()
-                }
+//                case "ControlView":
+//                    DriveView()
+//                default:
+//                    DriveView()
+//                }
             }
+
             Spacer()
             TextEditor(text: $commObject.responseString)
                 .frame(height: 200.0)
                 .background(Color.yellow)
-                .font(.caption)
+                .font(.headline)
                 .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
         }
-//        .padding(EdgeInsets(top: 4.0, leading: 20.0, bottom: 4.0, trailing: 20.0))
     }
 }
 

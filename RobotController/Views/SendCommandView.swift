@@ -10,7 +10,7 @@ import SwiftUI
 struct SendCommandView: View {
     @ObservedObject var commObject = targetPort
     @State private var commandField: String = ""
-    
+
     var body: some View {
         HStack {
             Button("Send") {
