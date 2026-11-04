@@ -42,7 +42,8 @@ class Speed : ObservableObject {
 
     private var hasValidSpeedArray = false                                 // Not loaded initially, using fill in default
 
-    private init() {
+    // Internal (not private) so unit tests can create fresh instances; the app uses `Speed.shared`
+    init() {
         setup()
     }
 
