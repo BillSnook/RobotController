@@ -69,39 +69,47 @@ class Speed : ObservableObject {
     }
 
     // Set parameters from response from device with it's speed index data
+    // Expected format: "S <indexSpace>" header line, then "<index> <left> <right>" lines.
+    // Malformed messages are ignored and malformed or out of range lines are skipped.
     func setup(_ message: String, _ initialIndex: Int = 1) {
         let params = message.split(separator: "\n")
-        let header = params[0].split(separator: " ")
+        guard let headerLine = params.first else {
+            print("Speed.setup error, empty message from device")
+            return
+        }
+        let header = headerLine.split(separator: " ")
         guard header.count == 2 else {
             return
         }
-        indexSpace = Int( header[1] ) ?? defaultSpeedArrayIndexSpace
+        let deviceIndexSpace = Int( header[1] ) ?? defaultSpeedArrayIndexSpace
+        guard deviceIndexSpace > 0 else {
+            print("Speed.setup error, invalid indexSpace == \(header[1])")
+            return
+        }
+        indexSpace = deviceIndexSpace
         print("Speed.setup from device, indexSpace == \(indexSpace)")
-        internalIndex = indexSpace + initialIndex
+        // Keep the selection inside the table even if initialIndex is out of range
+        internalIndex = min(max(indexSpace + initialIndex, 0), indexSpace * 2)
         left = Array(repeating: SpeedChartEntry(index: "0", value: 0), count: indexSpace * 2 + 1)
         right = Array(repeating: SpeedChartEntry(index: "0", value: 0), count: indexSpace * 2 + 1)
         // Here we update the Speed object, speed
-        for paramString in params {
+        for paramString in params.dropFirst() {
             let entry = paramString.split(separator: " ")
-            if entry[0] != "S" {
-                let optIndex = Int( entry[0] )
-                let optLeft = Int( entry[1] )
-                let optRight = Int( entry[2] )
-                if let index = optIndex, let leftValue = optLeft, let rightValue = optRight {
-                    let walkingIndex = index + indexSpace
-                    if walkingIndex >= 0 {
-                        print("\(index), walkingIndex: \(walkingIndex): \(leftValue)  \(rightValue)")
-                        left[walkingIndex] = SpeedChartEntry(index: String(index),
-                                                             value: leftValue)
-                        right[walkingIndex] = SpeedChartEntry(index: String(index),
-                                                              value: rightValue)
-                    } else {
-                        print("Speed.setup error for index == \(index), internalIndex == \(internalIndex)")
-                    }
-                } else {
-                    print("Speed.setup error for index == \(optIndex ?? 999), internalIndex == \(internalIndex)")
-                }
+            guard entry.count >= 3 else {
+                print("Speed.setup error, skipping short line: \(paramString)")
+                continue
             }
+            guard let index = Int( entry[0] ), let leftValue = Int( entry[1] ), let rightValue = Int( entry[2] ) else {
+                print("Speed.setup error, skipping non-numeric line: \(paramString)")
+                continue
+            }
+            let walkingIndex = index + indexSpace
+            guard left.indices.contains(walkingIndex) else {
+                print("Speed.setup error for index == \(index), outside -\(indexSpace)...\(indexSpace)")
+                continue
+            }
+            left[walkingIndex] = SpeedChartEntry(index: String(index), value: leftValue)
+            right[walkingIndex] = SpeedChartEntry(index: String(index), value: rightValue)
         }
         hasValidSpeedArray = true
     }

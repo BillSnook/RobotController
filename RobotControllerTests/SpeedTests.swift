@@ -193,6 +193,65 @@ final class SpeedTests: XCTestCase {
         XCTAssertTrue(speed.right.allSatisfy { $0.value == 60 })
     }
 
+    // MARK: - Malformed device messages (used to crash)
+
+    func testSetupFromEmptyMessageIsIgnored() {
+        let before = speed.left
+        speed.setup("")
+        speed.setup("\n\n")
+        XCTAssertEqual(speed.left, before)
+        XCTAssertEqual(speed.selectedIndex, 1)
+    }
+
+    func testSetupFromDeviceMessageIgnoresZeroOrNegativeIndexSpace() {
+        let before = speed.left
+        speed.setup("S 0\n0 0 0")
+        XCTAssertEqual(speed.left, before)
+        speed.setup("S -3\n1 10 10")
+        XCTAssertEqual(speed.left, before)
+
+        // Still accepts the default table afterwards, since nothing was loaded
+        speed.setup(-1)
+        XCTAssertEqual(speed.selectedIndex, -1)
+    }
+
+    func testSetupFromDeviceMessageSkipsShortLines() {
+        var lines = ["S 8"]
+        for index in -8...8 { lines.append("\(index) 50 60") }
+        lines.append("5")               // Index only
+        lines.append("5 999")           // Missing right value
+        lines.append("   ")             // Blank line
+        speed.setup(lines.joined(separator: "\n"))
+
+        XCTAssertEqual(speed.left.count, 17)
+        XCTAssertTrue(speed.left.allSatisfy { $0.value == 50 })
+        XCTAssertTrue(speed.right.allSatisfy { $0.value == 60 })
+    }
+
+    func testSetupFromDeviceMessageSkipsIndexAboveRange() {
+        var lines = ["S 4"]
+        for index in -4...4 { lines.append("\(index) 50 60") }
+        lines.append("5 999 999")       // One past the top of a 4 index table
+        lines.append("8 999 999")
+        speed.setup(lines.joined(separator: "\n"))
+
+        XCTAssertEqual(speed.left.count, 9)
+        XCTAssertTrue(speed.left.allSatisfy { $0.value == 50 })
+        XCTAssertTrue(speed.right.allSatisfy { $0.value == 60 })
+    }
+
+    func testSetupFromDeviceMessageClampsInitialIndexToTable() {
+        let message = deviceMessage(indexSpace: 4, left: { abs($0) }, right: { abs($0) })
+
+        speed.setup(message, 10)
+        XCTAssertEqual(speed.selectedIndex, 4)
+        XCTAssertEqual(speed.leftFloat, 4)      // Accessor must not go out of range
+
+        speed.setup(message, -10)
+        XCTAssertEqual(speed.selectedIndex, -4)
+        XCTAssertEqual(speed.rightFloat, 4)
+    }
+
     func testDefaultSetupDoesNotOverwriteDeviceTable() {
         let message = deviceMessage(indexSpace: 8, left: { _ in 42 }, right: { _ in 43 })
         speed.setup(message)
