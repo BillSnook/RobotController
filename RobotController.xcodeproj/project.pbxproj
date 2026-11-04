@@ -53,10 +53,11 @@
 		A954C7232A66062E0019DF7F /* CalibrateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalibrateView.swift; sourceTree = "<group>"; };
 		A954C7252A6606670019DF7F /* DriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveView.swift; sourceTree = "<group>"; };
 		A9B7E0102A63A60100C97DC2 /* TitleFileActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFileActions.swift; sourceTree = "<group>"; };
-		A9E37AF82B1D2F4000E78E89 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A9C0FFEE0000000000000011 /* SpeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTests.swift; sourceTree = "<group>"; };
 		A9C0FFEE0000000000000012 /* ConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionTests.swift; sourceTree = "<group>"; };
 		A9C0FFEE0000000000000013 /* RobotControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RobotControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9E37AF82B1D2F4000E78E89 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A9EA4D3D309BBE9C007E9D85 /* RobotController.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = RobotController.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,7 @@
 		A93F51CD2A46253F00CA3CF7 = {
 			isa = PBXGroup;
 			children = (
+				A9EA4D3D309BBE9C007E9D85 /* RobotController.xctestplan */,
 				A93F51D82A46253F00CA3CF7 /* RobotController */,
 				A9C0FFEE0000000000000041 /* RobotControllerTests */,
 				A93F51D72A46253F00CA3CF7 /* Products */,

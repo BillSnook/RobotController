@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "4D6B5314-4E55-4853-A6AB-D1D8DBFDA1AC",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:RobotController.xcodeproj",
+      "identifier" : "A93F51D52A46253F00CA3CF7",
+      "name" : "RobotController"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:RobotController.xcodeproj",
+        "identifier" : "A9C0FFEE0000000000000051",
+        "name" : "RobotControllerTests"
+      }
+    }
+  ],
+  "version" : 1
+}
